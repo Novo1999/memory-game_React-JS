@@ -78,6 +78,42 @@ body {
   background: #4d9ee0;
   transition: 0.3s all linear;
   box-shadow: 0 0 10px 3px var(--clr-palette-1);
+  transform: translateY(-5px);
+}
+.instruction:first-child {
+  text-align: end;
+  color: var(--clr-palette-1);
+  font-weight: var(--f-weight-3);
+  animation: left 3s infinite;
+}
+
+.instruction:not(:first-child) {
+  font-size: 18px;
+  text-align: end;
+  margin-bottom: -7rem;
+  animation: right 3s infinite;
+}
+@keyframes left {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(-30px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+@keyframes right {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(36px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
 }
 
 .start__screen-btn {
@@ -86,7 +122,9 @@ body {
   align-items: center;
   margin-top: 5rem;
 }
-
+.btn:hover {
+  transform: translateY(-5px);
+}
 .btn-group {
   display: flex;
   justify-content: space-evenly;

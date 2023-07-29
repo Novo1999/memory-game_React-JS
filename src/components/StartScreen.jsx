@@ -7,6 +7,8 @@ function StartScreen({ difficulty, status, dispatch, children }) {
   return (
     <div className="start__screen">
       <div>
+        <p className="instruction">How to Play:</p>
+        <p className="instruction">Don&apos;t Click the same image twice</p>
         <h1>
           <span className="welcome">Welcome</span> to 🧠Memory Game !
         </h1>
