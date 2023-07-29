@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-function StartScreen({ difficulty, status, dispatch }) {
+function StartScreen({ difficulty, status, dispatch, children }) {
   function handleDifficulty(e) {
     if (!e.target.value) return;
     dispatch({ type: "difficulty", payload: e.target.value });
@@ -39,9 +39,7 @@ function StartScreen({ difficulty, status, dispatch }) {
               👿 Hard 👿
             </button>
           </div>
-          {status === "ready" && (
-            <button className="btn btn-start">Start Game!</button>
-          )}
+          {difficulty && children}
         </div>
       </div>
     </div>

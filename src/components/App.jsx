@@ -11,6 +11,7 @@ const initialState = {
   clicked: "",
   score: 0,
   highscore: 0,
+  start: false,
 };
 
 function reducer(state, action) {
@@ -37,6 +38,11 @@ function reducer(state, action) {
         status: state.clickedArr.includes(action.payload) ? "lose" : "continue",
         score: state.score + 1,
       };
+    case "startGame":
+      return {
+        ...state,
+        start: action.payload,
+      };
 
     default:
       throw new Error("Unknown");
@@ -45,7 +51,16 @@ function reducer(state, action) {
 
 function App() {
   const [
-    { images, score, difficulty, status, clicked, clickedArr, highscore },
+    {
+      images,
+      score,
+      difficulty,
+      status,
+      clicked,
+      clickedArr,
+      highscore,
+      start,
+    },
     dispatch,
   ] = useReducer(reducer, initialState);
 
@@ -54,14 +69,27 @@ function App() {
   console.log(status);
   return (
     <div>
-      {/* <StartScreen state={state} dispatch={dispatch} /> */}
-      <Game
-        dispatch={dispatch}
-        score={score}
-        images={images}
-        highscore={highscore}
-        status={status}
-      />
+      {!start && (
+        <StartScreen difficulty={difficulty} dispatch={dispatch}>
+          <button
+            onClick={() => dispatch({ type: "startGame", payload: true })}
+            className="btn btn-start"
+          >
+            Start Game!
+          </button>
+        </StartScreen>
+      )}
+
+      {start && (
+        <Game
+          dispatch={dispatch}
+          score={score}
+          images={images}
+          highscore={highscore}
+          status={status}
+          difficulty={difficulty}
+        />
+      )}
     </div>
   );
 }

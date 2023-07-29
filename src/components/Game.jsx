@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 
-function Game({ images, dispatch, score, highscore, status }) {
+function Game({ images, dispatch, score, highscore, status, difficulty }) {
   const [gameImages, setGameImages] = useState(images);
   const [shuffled, setShuffled] = useState(false);
 
@@ -35,7 +35,15 @@ function Game({ images, dispatch, score, highscore, status }) {
     async function fetchWaifu() {
       try {
         const res = await fetch(
-          "https://api.jikan.moe/v4/characters/2/pictures"
+          `https://api.jikan.moe/v4/characters/${
+            difficulty === "hard"
+              ? 1
+              : difficulty === "medium"
+              ? 2
+              : difficulty === "easy"
+              ? 3
+              : 0
+          }/pictures`
         );
         const data = await res.json();
         dispatch({ type: "getImages", payload: data.data });
@@ -50,14 +58,15 @@ function Game({ images, dispatch, score, highscore, status }) {
       }
     }
     fetchWaifu();
-  }, [dispatch]);
+  }, [dispatch, difficulty]);
+  const margin = difficulty === "easy" ? { marginLeft: "14rem" } : {};
   return (
     <>
       <div className="scores">
         <h1 className="score">Score: {score}</h1>
         <h1 className="highscore">HighScore: {highscore}</h1>
       </div>
-      <div className="game">
+      <div style={margin} className="game">
         {gameImages.map((img, i) => (
           <img
             onClick={() => handleImageClick(img)}
