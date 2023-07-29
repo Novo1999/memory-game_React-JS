@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-function StartScreen({ state, dispatch }) {
+function StartScreen({ difficulty, status, dispatch }) {
   function handleDifficulty(e) {
     if (!e.target.value) return;
     dispatch({ type: "difficulty", payload: e.target.value });
@@ -17,7 +17,7 @@ function StartScreen({ state, dispatch }) {
             <button
               value="easy"
               className={`btn btn-ui ${
-                state.difficulty === "easy" ? "selected" : ""
+                difficulty === "easy" ? "selected" : ""
               }`}
             >
               👶 Easy 👶
@@ -25,7 +25,7 @@ function StartScreen({ state, dispatch }) {
             <button
               value="medium"
               className={`btn btn-ui ${
-                state.difficulty === "medium" ? "selected" : ""
+                difficulty === "medium" ? "selected" : ""
               }`}
             >
               😐 Medium 😐
@@ -33,13 +33,13 @@ function StartScreen({ state, dispatch }) {
             <button
               value="hard"
               className={`btn btn-ui ${
-                state.difficulty === "hard" ? "selected" : ""
+                difficulty === "hard" ? "selected" : ""
               }`}
             >
               👿 Hard 👿
             </button>
           </div>
-          {state.status === "ready" && (
+          {status === "ready" && (
             <button className="btn btn-start">Start Game!</button>
           )}
         </div>
