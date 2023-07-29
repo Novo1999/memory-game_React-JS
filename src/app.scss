@@ -94,15 +94,66 @@ body {
 }
 
 .game {
-  height: 99vh;
+  height: 50rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10rem;
+  gap: 2rem;
 }
 
 .game-image {
-  width: 650px;
-  height: 1000px;
+  width: 11rem;
+  height: 17rem;
   cursor: pointer;
+}
+
+.animation {
+  animation: shuffle 0.5s linear;
+}
+.animation-2 {
+  animation: shuffle-2 0.5s linear;
+}
+
+@keyframes shuffle {
+  0% {
+    transform: rotateX(0deg);
+  }
+  50% {
+    transform: rotateX(180deg);
+  }
+  0% {
+    transform: rotateX(0deg);
+  }
+}
+@keyframes shuffle-2 {
+  0% {
+    transform: rotateX(0deg);
+  }
+  50% {
+    transform: rotateX(-180deg);
+  }
+  0% {
+    transform: rotateX(0deg);
+  }
+}
+
+.scores {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+.score,
+.highscore {
+  color: var(--clr-primary);
+  font-family: var(--font-family);
+  text-align: center;
+  position: relative;
+  top: 15rem;
+}
+.score {
+  color: var(--clr-palette-4);
+}
+
+.highscore {
+  color: var(--clr-palette-3);
 }
