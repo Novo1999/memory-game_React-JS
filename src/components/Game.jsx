@@ -31,8 +31,8 @@ function Game({ images, dispatch, score, highscore, difficulty }) {
     dispatch({ type: "clickedImage", payload: img.id });
   }
   useEffect(() => {
-    if (score > 0)
-      score === gameImages.length && dispatch({ type: "win", payload: true });
+    if (score === 0) return;
+    score === gameImages.length && dispatch({ type: "win", payload: true });
   }, [score, dispatch, gameImages]);
 
   useEffect(() => {
@@ -56,7 +56,9 @@ function Game({ images, dispatch, score, highscore, difficulty }) {
             Math.random() * Math.floor(Math.random() * Date.now())
           )}`;
         });
-      } catch (err) {}
+      } catch (err) {
+        console.error("Couldn't Fetch Images!");
+      }
     }
     fetchImages();
   }, [dispatch, difficulty]);

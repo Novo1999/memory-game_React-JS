@@ -66,6 +66,8 @@ function reducer(state, action) {
         highscore: state.highscore,
         start: true,
         end: false,
+        winStatus: false,
+        clickedArr: [],
       };
     default:
       throw new Error("Unknown");
@@ -74,19 +76,23 @@ function reducer(state, action) {
 
 function App() {
   const [
-    {
-      images,
-      score,
-      difficulty,
-      clicked,
-      clickedArr,
-      highscore,
-      start,
-      end,
-      winStatus,
-    },
+    { images, score, difficulty, highscore, start, end, winStatus },
     dispatch,
   ] = useReducer(reducer, initialState);
+  console.log(
+    "Score =",
+    score,
+    "images length =",
+    images.length,
+    "difficulty =",
+    difficulty,
+    "start =",
+    start,
+    "end =",
+    end,
+    "Win Status =",
+    winStatus
+  );
   return (
     <div>
       {!start && (
