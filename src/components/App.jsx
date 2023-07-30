@@ -79,20 +79,20 @@ function App() {
     { images, score, difficulty, highscore, start, end, winStatus },
     dispatch,
   ] = useReducer(reducer, initialState);
-  console.log(
-    "Score =",
-    score,
-    "images length =",
-    images.length,
-    "difficulty =",
-    difficulty,
-    "start =",
-    start,
-    "end =",
-    end,
-    "Win Status =",
-    winStatus
-  );
+  // console.log(
+  //   "Score =",
+  //   score,
+  //   "images length =",
+  //   images.length,
+  //   "difficulty =",
+  //   difficulty,
+  //   "start =",
+  //   start,
+  //   "end =",
+  //   end,
+  //   "Win Status =",
+  //   winStatus
+  // );
   return (
     <div>
       {!start && (
