@@ -1,7 +1,6 @@
 function WinModal({ winStatus, score, highscore, dispatch }) {
   function handleModalButtons(e) {
     if (!e.target.value) return;
-    console.log(e.target.value);
     dispatch({ type: "restart", payload: e.target.value });
   }
   return (

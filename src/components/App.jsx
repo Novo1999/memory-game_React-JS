@@ -87,10 +87,6 @@ function App() {
     },
     dispatch,
   ] = useReducer(reducer, initialState);
-  console.log(winStatus);
-  console.log(clicked);
-  console.log(clickedArr);
-  console.log(end);
   return (
     <div>
       {!start && (

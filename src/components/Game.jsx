@@ -28,9 +28,7 @@ function Game({ images, dispatch, score, highscore, difficulty }) {
   function handleImageClick(img) {
     setTimeout(() => setGameImages(shuffledImages), 350);
     setShuffled((status) => !status);
-    console.log(img.id);
     dispatch({ type: "clickedImage", payload: img.id });
-    console.log(score);
   }
   useEffect(() => {
     if (score > 0)
@@ -58,10 +56,7 @@ function Game({ images, dispatch, score, highscore, difficulty }) {
             Math.random() * Math.floor(Math.random() * Date.now())
           )}`;
         });
-        console.log(data);
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     }
     fetchImages();
   }, [dispatch, difficulty]);
