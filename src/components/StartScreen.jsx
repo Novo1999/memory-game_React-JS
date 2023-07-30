@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-function StartScreen({ difficulty, status, dispatch, children }) {
+function StartScreen({ difficulty, dispatch, children }) {
   function handleDifficulty(e) {
     if (!e.target.value) return;
     dispatch({ type: "difficulty", payload: e.target.value });

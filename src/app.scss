@@ -137,6 +137,7 @@ body {
 }
 
 .game {
+  position: relative;
   margin-top: -5rem;
   height: 60rem;
   display: grid;
@@ -206,4 +207,42 @@ body {
 
 .highscore {
   color: var(--clr-palette-3);
+}
+.win-modal-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 45rem;
+}
+.win-modal {
+  position: absolute;
+  bottom: 13rem;
+  width: 50rem;
+  height: 30rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--clr-palette-1);
+  color: var(--clr-primary);
+  font-family: var(--font-family);
+  box-shadow: 0 0 10px 2px var(--clr-neutral);
+  border-radius: 1rem;
+  h1 {
+    font-size: 4rem;
+    margin-bottom: -1rem;
+  }
+  p {
+    font-size: 30px;
+  }
+}
+.modal-btn {
+  display: flex;
+  gap: 3rem;
+}
+.btn-modal {
+  background-color: var(--clr-palette-2);
+  font-size: 20px;
+}
+#modal-score {
+  font-size: 20px;
 }

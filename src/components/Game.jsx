@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 
-function Game({ images, dispatch, score, highscore, status, difficulty }) {
+function Game({ images, dispatch, score, highscore, difficulty }) {
   const [gameImages, setGameImages] = useState(images);
   const [shuffled, setShuffled] = useState(false);
 
@@ -30,9 +30,15 @@ function Game({ images, dispatch, score, highscore, status, difficulty }) {
     setShuffled((status) => !status);
     console.log(img.id);
     dispatch({ type: "clickedImage", payload: img.id });
+    console.log(score);
   }
   useEffect(() => {
-    async function fetchWaifu() {
+    if (score > 0)
+      score === gameImages.length && dispatch({ type: "win", payload: true });
+  }, [score, dispatch, gameImages]);
+
+  useEffect(() => {
+    async function fetchImages() {
       try {
         const res = await fetch(
           `https://api.jikan.moe/v4/characters/${
@@ -57,7 +63,7 @@ function Game({ images, dispatch, score, highscore, status, difficulty }) {
         console.log(err);
       }
     }
-    fetchWaifu();
+    fetchImages();
   }, [dispatch, difficulty]);
   const margin = difficulty === "easy" ? { marginLeft: "14rem" } : {};
   return (

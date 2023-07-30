@@ -2,16 +2,18 @@ import { useReducer } from "react";
 import "../app.scss";
 import StartScreen from "../components/StartScreen";
 import Game from "../components/Game";
+import WinModal from "./WinModal";
 
 const initialState = {
   difficulty: null,
   images: [],
-  status: "",
   clickedArr: [],
   clicked: "",
   score: 0,
   highscore: 0,
   start: false,
+  end: false,
+  winStatus: false,
 };
 
 function reducer(state, action) {
@@ -20,30 +22,51 @@ function reducer(state, action) {
       return {
         ...state,
         difficulty: action.payload,
-        status: "ready",
       };
     case "getImages":
       return {
         ...state,
-        status: "loaded",
         images: action.payload,
       };
     case "clickedImage":
       if (state.clickedArr.includes(action.payload))
-        return { ...state, clickedArr: [], score: 0, highscore: state.score };
+        return {
+          ...state,
+          clickedArr: [],
+          score: state.score,
+          highscore:
+            state.highscore > state.score ? state.highscore : state.score,
+          end: true,
+        };
       return {
         ...state,
         clicked: action.payload,
         clickedArr: [...state.clickedArr, action.payload],
-        status: state.clickedArr.includes(action.payload) ? "lose" : "continue",
         score: state.score + 1,
+        end: false,
       };
     case "startGame":
       return {
         ...state,
         start: action.payload,
       };
-
+    case "win":
+      return {
+        ...state,
+        winStatus: action.payload,
+        end: action.payload,
+        highscore:
+          state.highscore > state.score ? state.highscore : state.score,
+      };
+    case "restart":
+      return {
+        ...state,
+        difficulty: action.payload,
+        score: 0,
+        highscore: state.highscore,
+        start: true,
+        end: false,
+      };
     default:
       throw new Error("Unknown");
   }
@@ -55,18 +78,19 @@ function App() {
       images,
       score,
       difficulty,
-      status,
       clicked,
       clickedArr,
       highscore,
       start,
+      end,
+      winStatus,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
-
+  console.log(winStatus);
   console.log(clicked);
   console.log(clickedArr);
-  console.log(status);
+  console.log(end);
   return (
     <div>
       {!start && (
@@ -79,17 +103,26 @@ function App() {
           </button>
         </StartScreen>
       )}
-
       {start && (
         <Game
           dispatch={dispatch}
           score={score}
           images={images}
           highscore={highscore}
-          status={status}
           difficulty={difficulty}
+          winStatus={winStatus}
         />
       )}
+      (
+      {end && (
+        <WinModal
+          winStatus={winStatus}
+          dispatch={dispatch}
+          score={score}
+          highscore={highscore}
+        />
+      )}
+      )
     </div>
   );
 }
