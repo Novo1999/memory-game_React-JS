@@ -14,6 +14,7 @@ const initialState = {
   start: false,
   end: false,
   winStatus: false,
+  gameEnd: false,
 };
 
 function reducer(state, action) {
@@ -76,7 +77,7 @@ function reducer(state, action) {
 
 function App() {
   const [
-    { images, score, difficulty, highscore, start, end, winStatus },
+    { images, score, difficulty, highscore, start, end, winStatus, gameEnd },
     dispatch,
   ] = useReducer(reducer, initialState);
   // console.log(
@@ -112,7 +113,7 @@ function App() {
           images={images}
           highscore={highscore}
           difficulty={difficulty}
-          winStatus={winStatus}
+          end={end}
         />
       )}
       (

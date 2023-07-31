@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 
-function Game({ images, dispatch, score, highscore, difficulty }) {
+function Game({ images, dispatch, score, highscore, difficulty, end }) {
   const [gameImages, setGameImages] = useState(images);
   const [shuffled, setShuffled] = useState(false);
 
@@ -34,6 +34,12 @@ function Game({ images, dispatch, score, highscore, difficulty }) {
     if (score === 0) return;
     score === gameImages.length && dispatch({ type: "win", payload: true });
   }, [score, dispatch, gameImages]);
+
+  useEffect(() => {
+    const game = document.querySelector(".game");
+    if (end) game.style.visibility = "hidden";
+    if (!end) game.style.visibility = "visible";
+  }, [end]);
 
   useEffect(() => {
     async function fetchImages() {
