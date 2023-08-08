@@ -71,7 +71,7 @@ function reducer(state, action) {
         clickedArr: [],
       };
     default:
-      throw new Error("Unknown");
+      throw new Error("Unknowns");
   }
 }
 
